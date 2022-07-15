@@ -1,0 +1,21 @@
+---
+stack: bigtop 
+repo_uri: "http://repos.bigtop.apache.org/releases/3.1.0/centos/7/$basearch"
+head_node: master
+storage_dirs: [/data/1, /data/2]
+configs:
+  hadoop::common::use_tez: true
+  hadoop::common_yarn::yarn_resourcemanager_scheduler_class: org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler
+nodes:
+  - hostname: master
+    roles: [namenode, resourcemanager, hive-client, hive-metastore]
+    configs: 
+      hadoop_hive::common_config::hive_tez_container_size: 1024
+      hadoop_hive::common_config::hive_tez_cpu_vcores: 1
+      hadoop_hive::common_config::hive_server2_enable_doAs: false
+  - hostname: worker01
+    roles: [mapred-app, nodemanager, datanode]
+    configs:
+  - hostname: worker02
+    roles: [mapred-app, nodemanager, datanode]
+    configs:
