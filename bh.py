@@ -1,5 +1,13 @@
 import yaml
+import os
 from copy import deepcopy
+
+def mkdir(path):
+    paths = os.getcwd()
+    path = os.path.join(paths, path)
+    if not os.path.exists(path): 
+      os.mkdir(path)
+
 with open('sample.yaml', 'r') as f:
   doc = yaml.load(f, Loader=yaml.FullLoader)
   nodes = doc["nodes"]
@@ -19,7 +27,8 @@ with open('sample.yaml', 'r') as f:
       for key, value in nodes[i]["configs"].items():
         config_result.append((key, value))
     config_dict = dict(config_result)
-    # print(nodes[i])
-    with open(nodes[i]["hostname"] + "_site.yaml", 'w') as a:
-      yaml.dump(config_dict, a)
 
+    mkdir("tmp")
+    # print(nodes[i])
+    with open("tmp/" + nodes[i]["hostname"] + "_site.yaml", 'w') as a:
+      yaml.dump(config_dict, a)
