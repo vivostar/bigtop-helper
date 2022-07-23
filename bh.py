@@ -1,7 +1,7 @@
 import yaml
 import os
 from copy import deepcopy
-
+# The command line is create bigtop top hiera yaml config file
 def mkdir(path):
     paths = os.getcwd()
     path = os.path.join(paths, path)

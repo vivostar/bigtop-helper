@@ -1,3 +1,5 @@
+# the command line is manage the hiera config file 
+# and deploy bigtop component on each node.
 from sys import stderr, stdin, stdout
 from paramiko import SSHClient, AutoAddPolicy
 client = SSHClient()
